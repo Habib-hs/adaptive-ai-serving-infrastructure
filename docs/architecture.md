@@ -8,17 +8,17 @@ The Adaptive AI Serving Infrastructure handles model inference requests end to e
 
 ## End-to-End Flow
 
-1. **Client -> Inference Gateway**  
-   Client applications send inference requests to the gateway, which validates and routes traffic.
+1. **Client → Inference Gateway**  
+   Client applications send inference requests to the gateway, which performs request validation and routing.
 
-2. **Gateway -> Model Serving Layer**  
-   The serving layer executes model inference and returns prediction results.
+2. **Gateway → Redis Rate Limiter**  
+   Incoming requests are checked against the current rate-limiting policy to protect the serving infrastructure from overload.
 
-3. **Telemetry Emission**  
-   Request metrics, model latency, error rates, and service health signals are emitted continuously.
+3. **Gateway → Model Service (gRPC)**  
+   Accepted requests are forwarded to the model service through gRPC for low-latency inference.
 
-4. **Monitoring and Storage**  
-   Observability components collect, visualize, and store system and model-serving data.
+4. **Event Streaming & Storage**  
+   Inference events are published to Kafka, consumed by the Storage Service, and persisted in PostgreSQL for analysis and auditing.
 
-5. **Adaptive Control Loop**  
-   Based on telemetry trends (for example, high latency or failures), the platform can trigger adaptive actions such as scaling or routing adjustments.
+5. **Observability & Adaptive Control**  
+   Prometheus and Grafana collect runtime metrics. The Anomaly Service analyzes telemetry and automatically updates Redis rate-limiting thresholds to maintain system stability.
