@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package inference.v1;
+
+option java_multiple_files = true;
+option java_package = "io.github.habibhs.adaptive.contracts.inference.v1";
+option java_outer_classname = "InferenceProto";
+
+service ModelInferenceService {
+  rpc Predict(InferenceRequest) returns (InferenceResponse);
+}
+
+message InferenceRequest {
+  string request_id = 1;
+  string model_name = 2;
+  bytes payload = 3;
+  map<string, string> metadata = 4;
+  int64 request_timestamp = 5;
+}
+
+message InferenceResponse {
+  string request_id = 1;
+  string prediction = 2;
+  float confidence = 3;
+  string model_version = 4;
+  Status status = 5;
+  string error_message = 6;
+}
+
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  SUCCESS = 1;
+  FAILED = 2;
+  INVALID_INPUT = 3;
+}
