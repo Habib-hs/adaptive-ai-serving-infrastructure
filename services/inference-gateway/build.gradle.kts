@@ -32,6 +32,9 @@ dependencies {
     implementation("io.grpc:grpc-netty-shaded")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
 
+    // grpc-spring-boot-starter — provides @GrpcService annotation + auto-starts gRPC server
+    implementation("net.devh:grpc-server-spring-boot-starter:3.1.0.RELEASE")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testCompileOnly("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
