@@ -9,6 +9,7 @@ target/
 
 # Logs
 logs/
+notes/
 *.log
 
 # Data directories (MongoDB, etc.)
