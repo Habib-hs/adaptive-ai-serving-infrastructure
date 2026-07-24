@@ -3,7 +3,7 @@ from app.generated import inference_pb2
 
 
 class ModelInferenceService(inference_pb2_grpc.ModelInferenceServiceServicer):
-    def Predict(self, request, context): 
+    def Predict(self, request, context):
      return inference_pb2.InferenceResponse(
             request_id=request.request_id,
             prediction="Positive",
