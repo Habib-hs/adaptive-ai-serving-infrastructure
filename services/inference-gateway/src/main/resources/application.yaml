@@ -2,6 +2,13 @@ spring:
   application:
     name: gateway-service
 
+server:
+  port: 8080
+
 grpc:
   server:
     port: 9090
+  client:
+    inference-service:
+      address: 'static://localhost:50051'
+      negotiationType: PLAINTEXT
